@@ -1,0 +1,13 @@
+# Netlify config for the Coach Kal homepage (static site, no framework).
+# Git deploys: Netlify runs the build below and publishes /dist.
+# Drag-and-drop deploys: run `node build.js` locally, then drop the /dist folder on https://app.netlify.com/drop
+
+[build]
+  command = "node build.js"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# Headers and the 404 page are also shipped inside /dist (_headers, 404.html),
+# so they apply for drag-and-drop deploys too.

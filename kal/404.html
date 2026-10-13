@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Out of bounds | Coach Kal</title>
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+  <style>
+    :root { --ink: #141718; --paper: #F4F1EA; --lime: #C9F24A; }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: var(--ink); color: var(--paper); font-family: "Archivo", system-ui, sans-serif; padding: 24px; }
+    main { max-width: 640px; }
+    .mono { font: 500 12px/1.4 "IBM Plex Mono", monospace; letter-spacing: .1em; text-transform: uppercase; color: #9AA3A6; }
+    h1 { margin: 12px 0 16px; font-weight: 900; font-stretch: 66%; font-variation-settings: "wdth" 66; text-transform: uppercase; line-height: .9; font-size: clamp(56px, 12vw, 128px); }
+    h1 span { background: var(--lime); color: var(--ink); padding: 0 .1em; }
+    p { font-size: 18px; color: rgba(244,241,234,.85); }
+    a { display: inline-flex; align-items: center; gap: 12px; margin-top: 20px; height: 52px; padding: 0 6px 0 20px; background: var(--paper); color: var(--ink); text-decoration: none; font-weight: 650; text-transform: uppercase; letter-spacing: .06em; font-size: 14px; }
+    a span { display: grid; place-items: center; width: 42px; height: 42px; background: var(--lime); }
+    a:focus-visible { outline: 3px solid var(--paper); outline-offset: 3px; }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="mono">404 · Out of bounds</p>
+    <h1>That shot went <span>long.</span></h1>
+    <p>This page doesn’t exist. Head back to the court and choose your sport.</p>
+    <a href="/">Back to Coach Kal <span aria-hidden="true">→</span></a>
+  </main>
+</body>
+</html>

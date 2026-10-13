@@ -1,0 +1,734 @@
+<!doctype html>
+<html lang="en" data-sport="none">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Coach Kal | Pickleball, Tennis, Badminton &amp; Racquetball Coaching</title>
+  <meta name="description" content="Multi-sport racquet coaching with Coach Kal (Claude Keller). Personalized coaching across pickleball, tennis, badminton, racquetball and more, backed by 10+ years of teaching experience.">
+  <meta name="theme-color" content="#141718">
+  <!-- PLACEHOLDER: set canonical once the domain is confirmed -->
+  <!-- <link rel="canonical" href="https://[domain-to-be-confirmed]/"> -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Coach Kal | Multi-Sport Racquet Coaching">
+  <meta property="og:description" content="Pickleball, tennis, badminton, racquetball and more. 10+ years of teaching experience.">
+  <meta property="og:image" content="assets/media/img/pickleball-action-1600.webp">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" type="image/avif" href="assets/media/img/coaching-group-pointing-800.avif">
+  <link rel="stylesheet" href="assets/css/style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Claude Keller",
+    "alternateName": "Coach Kal",
+    "jobTitle": "Multi-sport racquet coach",
+    "description": "Multi-sport racquet coaching across pickleball, tennis, badminton, racquetball and more, with 10+ years of teaching experience.",
+    "knowsAbout": ["Pickleball", "Tennis", "Badminton", "Racquetball", "Racquet sports coaching"]
+  }
+  </script>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script defer src="assets/js/main.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- Screen-reader announcement of sport changes -->
+  <p class="sr-only" id="sport-live" aria-live="polite"></p>
+
+  <!-- Custom cursor (desktop, fine pointer only) -->
+  <div class="cursor" aria-hidden="true"><span class="cursor__dot"></span><span class="cursor__label"></span></div>
+
+  <!-- ═════════ NAV ═════════ -->
+  <header class="nav" id="nav">
+    <a class="nav__brand" href="#top" aria-label="Coach Kal — home">
+      <svg class="logo" viewBox="0 0 48 32" aria-hidden="true">
+        <rect class="logo__court" x="2" y="7" width="44" height="22" rx="2.5"/>
+        <path class="logo__lines" d="M13 7v22M35 7v22M2 18h11M35 18h11"/>
+        <g class="logo__x"><ellipse class="logo__shadow" cx="0" cy="26.5" rx="3.2" ry="1"/></g>
+        <line class="logo__net" x1="24" y1="4" x2="24" y2="31"/>
+        <g class="logo__x"><g class="logo__y"><circle class="logo__ball" cx="0" cy="0" r="3.4"/></g></g>
+      </svg>
+      <span class="logo__word"><span>C</span><span>o</span><span>a</span><span>c</span><span>h</span>&nbsp;<span class="logo__k">K</span><span class="logo__k">a</span><span class="logo__k">l</span></span>
+    </a>
+
+    <nav class="nav__links" aria-label="Primary">
+      <a href="#coach">Coach Kal</a>
+      <a href="#explorer">Sports</a>
+      <a href="#journey">Coaching</a>
+      <a href="#media">Media</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="nav__right">
+      <button class="nav__chip" type="button" data-scroll="#explorer" aria-label="Current sport: none selected. Go to sport explorer">
+        <span class="nav__chip-dot" aria-hidden="true"></span>
+        <span class="nav__chip-text" data-sport-text="short">No court yet</span>
+      </button>
+      <a class="btn btn--sm btn--ink magnetic" href="#court" data-cursor="choose" data-choose>
+        <span class="btn__text">Choose your sport</span>
+        <span class="btn__chip" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5"/></svg></span>
+      </a>
+      <button class="nav__burger" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
+        <span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobile-menu" hidden>
+    <nav aria-label="Mobile">
+      <a href="#coach">Coach Kal</a>
+      <a href="#explorer">Sports</a>
+      <a href="#journey">Coaching</a>
+      <a href="#media">Media</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <p class="mono mobile-menu__label">Choose your court</p>
+    <div class="mobile-menu__sports" data-sport-buttons></div>
+  </div>
+
+  <main id="main">
+
+    <!-- ═════════ 01 — CHOOSE YOUR COURT (HERO) ═════════ -->
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero__copy">
+        <p class="eyebrow mono"><span class="eyebrow__n">01</span> Choose your court</p>
+        <p class="hero__display" aria-hidden="true">
+          <span class="line"><span class="line__in">Train smarter.</span></span>
+          <span class="line"><span class="line__in">Play better.</span></span>
+        </p>
+        <h1 class="hero__h1" id="hero-title">
+          <span class="sr-only">Train smarter. Play better. </span>Multi-sport racquet coaching with Coach&nbsp;Kal
+        </h1>
+        <p class="hero__lede">Personalized coaching across pickleball, tennis, badminton, racquetball and more, backed by 10+ years of teaching experience.</p>
+
+        <div class="hero__ctas">
+          <a class="btn btn--ink btn--lg magnetic" href="#court" data-cursor="choose" data-choose>
+            <span class="btn__text">Choose your sport</span>
+            <span class="btn__chip" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5"/></svg></span>
+          </a>
+          <a class="btn btn--ghost btn--lg magnetic" href="#explorer" data-cursor="start">
+            <span class="btn__text">Explore coaching</span>
+            <span class="btn__chip" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 3v9M4.5 8.5 8 12l3.5-3.5"/></svg></span>
+          </a>
+        </div>
+
+        <dl class="hero__facts">
+          <div><dt class="mono">Teaching</dt><dd>10+ years</dd></div>
+          <div><dt class="mono">Courts</dt><dd>4 sports + more</dd></div>
+          <div><dt class="mono">Approach</dt><dd>Personalized</dd></div>
+        </dl>
+      </div>
+
+      <div class="hero__stage-wrap" id="court">
+        <!-- Readout: sport copy that changes with activeSport -->
+        <div class="readout" aria-live="off">
+          <p class="mono readout__label">Selected court</p>
+          <p class="readout__sport" data-sport-text="label">Pick a court</p>
+          <p class="readout__copy" data-sport-text="hero">Pick a court to see how coaching adapts to your sport.</p>
+          <p class="mono readout__dims" data-sport-text="dims">Neutral modular court</p>
+          <svg class="readout__gear" viewBox="0 0 100 240" aria-hidden="true"><use href="#gear-none"/></svg>
+        </div>
+
+        <!-- The one primary "3D" concept: a modular court (CSS 2.5D, no WebGL) -->
+        <div class="stage" data-cursor="choose" aria-hidden="true">
+          <div class="stage__cam">
+            <div class="floor">
+              <div class="floor__apron"></div>
+              <div class="floor__surface"></div>
+              <div class="floor__zones"></div>
+              <div class="floor__lines"></div>
+              <svg class="floor__trace" viewBox="0 0 1000 560" preserveAspectRatio="none"><path d=""/></svg>
+              <div class="floor__nodes"></div>
+              <div class="plane plane--net"><span></span></div>
+              <div class="plane plane--wall plane--front"></div>
+              <div class="plane plane--wall plane--back"></div>
+              <div class="plane plane--wall plane--side-a"></div>
+              <div class="plane plane--wall plane--side-b"></div>
+              <div class="ball-shadow"></div>
+              <div class="ball"><span class="ball__body"></span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sport media card (photo/video swaps with sport) -->
+        <figure class="hero-media">
+          <div class="hero-media__frame" data-media-slot="hero">
+            <picture>
+              <source type="image/avif" srcset="assets/media/img/coaching-group-pointing-800.avif">
+              <img src="assets/media/img/coaching-group-pointing-800.webp" width="800" height="1000" alt="Coach Kal giving instruction to two players on court" fetchpriority="high">
+            </picture>
+          </div>
+          <figcaption class="mono hero-media__cap" data-media-cap="hero">Coach Kal · Group instruction</figcaption>
+        </figure>
+
+        <!-- Sport selector: radiogroup, synced everywhere on the page -->
+        <div class="selector" role="radiogroup" aria-label="Choose your sport" data-sport-group="hero">
+          <!-- buttons injected from SPORTS config; static fallback below for no-JS -->
+          <noscript><p class="mono">Pickleball · Tennis · Badminton · Racquetball · More</p></noscript>
+        </div>
+        <p class="mono selector__hint"><span class="hint-desktop">Hover or select a court</span><span class="hint-touch">Swipe the court or tap a sport</span></p>
+      </div>
+
+      <!-- Hero → 02: the selected sport's key line flattens into the next section -->
+      <div class="hero__handoff" aria-hidden="true"><span></span></div>
+    </section>
+
+    <!-- ═════════ 02 — COACH KAL ═════════ -->
+    <section class="coach" id="coach" aria-labelledby="coach-title">
+      <div class="coach__anchor" aria-hidden="true">
+        <div class="anchor anchor--none"></div>
+        <div class="anchor anchor--pickleball"><span></span><span></span><em class="mono">Non-volley zone</em></div>
+        <div class="anchor anchor--tennis"><span></span><em class="mono">Baseline</em></div>
+        <div class="anchor anchor--badminton"><span></span><em class="mono">Net · 5 ft</em></div>
+        <div class="anchor anchor--racquetball"><span></span><em class="mono">Front wall</em></div>
+        <div class="anchor anchor--more"></div>
+      </div>
+
+      <div class="coach__visual">
+        <figure class="coach__portrait">
+          <picture>
+            <source type="image/avif" srcset="assets/media/img/coach-kal-portrait-800.avif 800w, assets/media/img/coach-kal-portrait-1600.avif 1122w" sizes="(max-width: 767px) 88vw, 36vw">
+            <img src="assets/media/img/coach-kal-portrait-800.webp" srcset="assets/media/img/coach-kal-portrait-800.webp 800w, assets/media/img/coach-kal-portrait-1600.webp 1122w" sizes="(max-width: 767px) 88vw, 36vw" width="800" height="1000" loading="lazy" decoding="async" alt="Coach Kal explaining a technique on court, holding a pickleball paddle">
+          </picture>
+          <figcaption class="mono">Coach Kal <span>— Claude Keller</span></figcaption>
+        </figure>
+        <figure class="coach__second">
+          <picture>
+            <source type="image/avif" srcset="assets/media/img/pickleball-coaching-gesture-800.avif">
+            <img src="assets/media/img/pickleball-coaching-gesture-800.webp" width="800" height="952" loading="lazy" decoding="async" alt="Coach Kal walking the court and demonstrating with a pickleball paddle">
+          </picture>
+        </figure>
+
+        <!-- One coach, multiple games: equipment silhouettes; active sport dominates -->
+        <ul class="gear-rail" aria-label="Sports coached">
+          <li data-gear="pickleball"><svg viewBox="0 0 100 240" aria-hidden="true"><use href="#gear-pickleball"/></svg><span class="mono">Pickleball</span></li>
+          <li data-gear="tennis"><svg viewBox="0 0 100 240" aria-hidden="true"><use href="#gear-tennis"/></svg><span class="mono">Tennis</span></li>
+          <li data-gear="badminton"><svg viewBox="0 0 100 240" aria-hidden="true"><use href="#gear-badminton"/></svg><span class="mono">Badminton</span></li>
+          <li data-gear="racquetball"><svg viewBox="0 0 100 240" aria-hidden="true"><use href="#gear-racquetball"/></svg><span class="mono">Racquetball</span></li>
+        </ul>
+      </div>
+
+      <div class="coach__copy">
+        <p class="eyebrow mono"><span class="eyebrow__n">02</span> Coach Kal</p>
+        <h2 class="h-display" id="coach-title">
+          <span>One coach.</span>
+          <span>Multiple games.</span>
+          <span class="accent-mark">10+ years teaching.</span>
+        </h2>
+        <p class="coach__lede">Coach Kal brings more than a decade of teaching experience across racquet sports, helping students learn, develop and improve through personalized instruction.</p>
+
+        <ul class="facts-rail">
+          <li><span class="facts-rail__k">10+</span><span class="facts-rail__v">Years of teaching experience</span></li>
+          <li><span class="facts-rail__k">4+</span><span class="facts-rail__v">Racquet sports: pickleball, tennis, badminton, racquetball — and more</span></li>
+          <li><span class="facts-rail__k">3–4</span><span class="facts-rail__v">A small team, depending on the week</span></li>
+          <li><span class="facts-rail__k">Part-time</span><span class="facts-rail__v">Currently coaching part-time</span></li>
+        </ul>
+
+        <p class="coach__sportline mono" data-sport-text="coach">Select a sport above — or keep scrolling to explore them all.</p>
+      </div>
+    </section>
+
+    <!-- ═════════ 03 — SPORT EXPLORER ═════════ -->
+    <section class="explorer" id="explorer" data-theme="dark" aria-labelledby="explorer-title">
+      <div class="explorer__head">
+        <p class="eyebrow mono"><span class="eyebrow__n">03</span> Sport explorer</p>
+        <h2 class="h-display" id="explorer-title"><span>What do you want</span> <span>to get better at?</span></h2>
+      </div>
+
+      <div class="explorer__body">
+        <div class="explorer__list" role="radiogroup" aria-label="Sport explorer" data-sport-group="explorer"></div>
+
+        <div class="viewport" data-cursor="choose">
+          <div class="viewport__media" data-media-slot="explorer"></div>
+          <p class="viewport__tag mono" data-media-cap="explorer"></p>
+
+          <div class="viewport__panel">
+            <div class="viewport__text">
+              <p class="mono viewport__idx" data-sport-text="idx">00</p>
+              <h3 class="viewport__title" data-sport-text="label">Choose a sport</h3>
+              <p class="viewport__desc" data-sport-text="explorer">Select a racquet sport to see how the court, the motion and the coaching focus change.</p>
+              <a class="btn btn--paper magnetic" href="#contact" data-cursor="start" data-cta-sport>
+                <span class="btn__text" data-sport-text="cta">Talk to Coach Kal</span>
+                <span class="btn__chip" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5"/></svg></span>
+              </a>
+            </div>
+
+            <!-- Side-view court diagram: motion physics per sport -->
+            <figure class="sideview">
+              <svg viewBox="0 0 400 170" role="img" aria-labelledby="sideview-t">
+                <title id="sideview-t">Side view of the selected court and a typical shot path</title>
+                <line class="sv-ground" x1="10" y1="150" x2="390" y2="150"/>
+
+                <g class="sv sv--none">
+                  <line class="sv-dash" x1="200" y1="150" x2="200" y2="120"/>
+                  <path class="sv-path" id="svp-none" d="M60 140 Q200 40 340 140"/>
+                </g>
+
+                <g class="sv sv--pickleball">
+                  <line class="sv-line" x1="40" y1="150" x2="40" y2="158"/><line class="sv-line" x1="360" y1="150" x2="360" y2="158"/>
+                  <line class="sv-key" x1="149" y1="146" x2="149" y2="158"/><line class="sv-key" x1="251" y1="146" x2="251" y2="158"/>
+                  <rect class="sv-zone" x="149" y="146" width="102" height="4"/>
+                  <line class="sv-net" x1="200" y1="150" x2="200" y2="126"/>
+                  <path class="sv-path" id="svp-pickleball" d="M60 132 Q150 70 232 150 Q244 132 256 134 Q205 96 168 150 Q158 132 148 134 Q250 60 340 150 Q350 134 358 136 Q200 30 60 132"/>
+                  <text class="sv-label" x="200" y="168">kitchen</text>
+                </g>
+
+                <g class="sv sv--tennis">
+                  <line class="sv-key" x1="20" y1="142" x2="20" y2="158"/><line class="sv-key" x1="380" y1="142" x2="380" y2="158"/>
+                  <line class="sv-line" x1="118" y1="150" x2="118" y2="156"/><line class="sv-line" x1="282" y1="150" x2="282" y2="156"/>
+                  <line class="sv-net" x1="200" y1="150" x2="200" y2="122"/>
+                  <path class="sv-path" id="svp-tennis" d="M26 116 Q190 0 318 150 Q346 118 374 120 Q210 0 82 150 Q54 118 26 116"/>
+                  <text class="sv-label" x="20" y="168">baseline</text><text class="sv-label" x="380" y="168">baseline</text>
+                </g>
+
+                <g class="sv sv--badminton">
+                  <line class="sv-line" x1="40" y1="150" x2="40" y2="158"/><line class="sv-line" x1="360" y1="150" x2="360" y2="158"/>
+                  <line class="sv-key sv-key--net" x1="200" y1="150" x2="200" y2="96"/>
+                  <line class="sv-tape" x1="200" y1="96" x2="200" y2="112"/>
+                  <path class="sv-path" id="svp-badminton" d="M70 118 C104 -70 300 -60 330 128 Q268 64 222 132 C196 -40 70 -40 70 118"/>
+                  <text class="sv-label" x="200" y="168">net</text>
+                </g>
+
+                <g class="sv sv--racquetball">
+                  <line class="sv-key" x1="370" y1="150" x2="370" y2="20"/>
+                  <line class="sv-line" x1="30" y1="150" x2="30" y2="96"/>
+                  <line class="sv-dash" x1="10" y1="20" x2="370" y2="20"/>
+                  <line class="sv-line" x1="200" y1="150" x2="200" y2="156"/>
+                  <path class="sv-path" id="svp-racquetball" d="M70 112 L370 62 L236 150 L30 110 L370 92 L262 150 L70 112"/>
+                  <text class="sv-label" x="370" y="168">front wall</text>
+                </g>
+
+                <g class="sv sv--more">
+                  <g class="sv-grid sv-grid--a"><line x1="40" y1="60" x2="200" y2="60"/><line x1="40" y1="105" x2="200" y2="105"/><line x1="80" y1="30" x2="80" y2="150"/><line x1="160" y1="30" x2="160" y2="150"/></g>
+                  <g class="sv-grid sv-grid--b"><line x1="200" y1="60" x2="360" y2="60"/><line x1="200" y1="105" x2="360" y2="105"/><line x1="240" y1="30" x2="240" y2="150"/><line x1="320" y1="30" x2="320" y2="150"/></g>
+                  <path class="sv-path" id="svp-more" d="M40 150 H80 V105 H160 V60 H240 V105 H320 V60 H360"/>
+                  <text class="sv-label" x="200" y="168">your sport here</text>
+                </g>
+
+                <circle class="sv-ball" r="5" cx="0" cy="0">
+                  <animateMotion dur="3s" repeatCount="indefinite" rotate="0"><mpath href="#svp-none"/></animateMotion>
+                </circle>
+              </svg>
+              <figcaption class="mono" data-sport-text="motion">Neutral path</figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+
+      <!-- 03 → 04: the active trajectory extends out of the explorer -->
+      <svg class="explorer__exit" viewBox="0 0 100 200" preserveAspectRatio="none" aria-hidden="true"><path d="M50 0 C50 80 50 120 50 200"/></svg>
+    </section>
+
+    <!-- ═════════ 04 — COACHING JOURNEY ═════════ -->
+    <section class="journey" id="journey" data-theme="dark" aria-labelledby="journey-title">
+      <div class="journey__pin">
+        <!-- light that follows the ball -->
+        <div class="journey__spot" aria-hidden="true"></div>
+        <div class="journey__grid" aria-hidden="true"></div>
+
+        <div class="journey__top">
+          <div class="journey__head">
+            <p class="eyebrow mono"><span class="eyebrow__n">04</span> Coaching journey</p>
+            <h2 class="jh" id="journey-title">
+              <span class="jh__row">
+                <span class="jh__word">Your</span>
+                <span class="jh__slot" aria-hidden="true"><span class="jh__reel"></span></span><span class="sr-only">sport</span><span class="jh__dot">.</span>
+              </span>
+              <span class="jh__row jh__row--outline"><span class="jh__word">Your</span> <span class="jh__word">goals.</span></span>
+              <span class="jh__row"><span class="jh__block"><span>Your next step.</span></span></span>
+            </h2>
+          </div>
+
+          <!-- live HUD: stage counter + spinning badge -->
+          <div class="hud" aria-hidden="true">
+            <div class="hud__badge">
+              <svg class="hud__ring" viewBox="0 0 120 120">
+                <defs><path id="hud-circle" d="M60 60 m-46 0 a46 46 0 1 1 92 0 a46 46 0 1 1 -92 0"/></defs>
+                <text><textPath href="#hud-circle">CHOOSE ✦ EXPLORE ✦ CONNECT ✦ TRAIN ✦ </textPath></text>
+              </svg>
+              <svg class="hud__gear" viewBox="0 0 100 240"><use href="#gear-none"/></svg>
+            </div>
+            <div class="hud__count">
+              <p class="mono hud__label">Stage</p>
+              <p class="hud__num"><span class="hud__cur">00</span><span class="hud__of">/04</span></p>
+              <p class="mono hud__name">Start the rally</p>
+              <span class="hud__bar"><span></span></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="track">
+          <p class="track__tag mono" data-sport-text="motion">Neutral path</p>
+          <svg class="track__svg" viewBox="0 0 1200 380" preserveAspectRatio="none" aria-hidden="true">
+            <line class="track__wall" x1="0" y1="20" x2="1200" y2="20"/>
+            <line class="track__floor" x1="0" y1="215" x2="1200" y2="215"/>
+            <path class="track__ghost" d=""/>
+            <path class="track__glow" d=""/>
+            <path class="track__path" d=""/>
+          </svg>
+          <svg class="track__svg track__svg--v" viewBox="0 0 200 1000" preserveAspectRatio="none" aria-hidden="true">
+            <path class="track__ghost" d=""/>
+            <path class="track__path" d=""/>
+          </svg>
+          <span class="track__trail" aria-hidden="true"></span>
+          <span class="track__ball" aria-hidden="true"></span>
+
+          <ol class="stages">
+            <li class="stage-item" data-stage="0">
+              <span class="stage-item__node" aria-hidden="true"></span>
+              <span class="stage-item__big" aria-hidden="true">01</span>
+              <p class="mono stage-item__n">01 · Choose</p>
+              <h3>Choose your sport</h3>
+              <p>Select the racquet sport you want to train in.</p>
+            </li>
+            <li class="stage-item" data-stage="1">
+              <span class="stage-item__node" aria-hidden="true"></span>
+              <span class="stage-item__big" aria-hidden="true">02</span>
+              <p class="mono stage-item__n">02 · Explore</p>
+              <h3>Explore coaching</h3>
+              <p>Understand the available coaching direction.</p>
+            </li>
+            <li class="stage-item" data-stage="2">
+              <span class="stage-item__node" aria-hidden="true"></span>
+              <span class="stage-item__big" aria-hidden="true">03</span>
+              <p class="mono stage-item__n">03 · Connect</p>
+              <h3>Connect with Coach Kal</h3>
+              <p>Talk about your goals and what you want help with.</p>
+            </li>
+            <li class="stage-item" data-stage="3">
+              <span class="stage-item__node" aria-hidden="true"></span>
+              <span class="stage-item__big" aria-hidden="true">04</span>
+              <p class="mono stage-item__n">04 · Train</p>
+              <h3>Start training</h3>
+              <p>Move forward with the appropriate coaching option.</p>
+            </li>
+          </ol>
+
+          <!-- where the trajectory meets the photo/video frame -->
+          <span class="track__slot" aria-hidden="true"><span class="mono">Real coaching →</span></span>
+        </div>
+
+        <!-- scrolling ticker band -->
+        <div class="journey__marquee" aria-hidden="true">
+          <div class="journey__marquee-track">
+            <span>Choose your sport ✦ Explore coaching ✦ Connect with Coach Kal ✦ Start training ✦&nbsp;</span>
+            <span>Choose your sport ✦ Explore coaching ✦ Connect with Coach Kal ✦ Start training ✦&nbsp;</span>
+          </div>
+        </div>
+
+        <!-- 04 → 05: the frame is a window that expands into the media section -->
+        <div class="journey__frame" data-media-slot="frame" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <!-- ═════════ 05 — SEE THE COACHING IN ACTION ═════════ -->
+    <section class="media" id="media" aria-labelledby="media-title">
+      <div class="media__lead" data-media-slot="lead" data-theme="dark"></div>
+
+      <div class="media__head">
+        <div>
+          <p class="eyebrow mono"><span class="eyebrow__n">05</span> Media</p>
+          <h2 class="h-display" id="media-title"><span>See the coaching</span> <span>in action.</span></h2>
+        </div>
+        <div class="media__filter">
+          <p class="media__status" data-media-status>Showing multi-sport coaching.</p>
+          <div class="chips" role="radiogroup" aria-label="Filter media by sport" data-sport-group="media"></div>
+        </div>
+      </div>
+
+      <div class="media__grid" data-media-grid>
+        <!-- 4 editorial slots filled from the media pool, prioritising activeSport -->
+      </div>
+
+      <aside class="media__placeholder" aria-label="Placeholder for student experiences">
+        <p class="mono">Placeholder · Student experiences</p>
+        <p class="media__placeholder-text">Real student stories and testimonials will appear here once provided by Coach Kal. <span>No quotes have been written on anyone’s behalf.</span></p>
+      </aside>
+    </section>
+
+    <!-- ═════════ 06 — COACHING THAT ADAPTS ═════════ -->
+    <section class="adapt" id="approach" aria-labelledby="adapt-title">
+      <div class="adapt__media" aria-hidden="true">
+        <picture>
+          <source type="image/avif" srcset="assets/media/img/coaching-overhead-group-800.avif 800w, assets/media/img/coaching-overhead-group-1600.avif 1122w" sizes="100vw">
+          <img src="assets/media/img/coaching-overhead-group-1600.webp" srcset="assets/media/img/coaching-overhead-group-800.webp 800w, assets/media/img/coaching-overhead-group-1600.webp 1122w" sizes="100vw" width="1122" height="1402" loading="lazy" decoding="async" alt="">
+        </picture>
+        <p class="adapt__media-cap mono">Look at the coaching → understand the coaching</p>
+      </div>
+
+      <div class="adapt__content">
+        <div class="adapt__head">
+          <div>
+            <p class="eyebrow mono"><span class="eyebrow__n">06</span> Coaching that adapts</p>
+            <h2 class="ah" id="adapt-title">
+              <span class="ah__row"><span class="ah__outline">Different</span>
+                <span class="ah__icons" aria-hidden="true">
+                  <svg viewBox="0 0 100 240"><use href="#gear-pickleball"/></svg>
+                  <svg viewBox="0 0 100 240"><use href="#gear-tennis"/></svg>
+                  <svg viewBox="0 0 100 240"><use href="#gear-badminton"/></svg>
+                  <svg viewBox="0 0 100 240"><use href="#gear-racquetball"/></svg>
+                </span>sports.</span>
+              <span class="ah__row">Same <span class="ah__focus">focus:<i></i><i></i><i></i><i></i></span></span>
+              <span class="ah__row"><span class="ah__hl"><span>Helping you improve.</span><span class="ah__arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 18 18 6M9 6h9v9"/></svg></span></span></span>
+            </h2>
+          </div>
+          <div class="adapt__aside">
+            <p>Whatever the court, the coaching comes back to the same three principles.</p>
+            <p class="mono adapt__hint"><span class="hint-desktop">Hover a principle</span><span class="hint-touch">Tap a principle</span> ↓</p>
+          </div>
+        </div>
+
+        <ol class="principles" data-principles>
+          <li class="principle is-open" data-principle="clear">
+            <button class="principle__tab" type="button" aria-expanded="true" aria-controls="pr-clear" data-cursor="view">
+              <span class="principle__n">01</span>
+              <span class="principle__vert">Clear teaching</span>
+              <span class="principle__plus" aria-hidden="true"></span>
+            </button>
+            <div class="principle__body" id="pr-clear">
+              <div class="principle__text">
+                <p class="mono principle__kicker">01 · Principle</p>
+                <h3>Clear teaching</h3>
+                <p>Make instruction easy to understand.</p>
+              </div>
+              <svg class="principle__viz viz-clear" viewBox="0 0 400 260" aria-hidden="true">
+                <g class="viz-grid"><path d="M0 65H400M0 130H400M0 195H400M100 0V260M200 0V260M300 0V260"/></g>
+                <path class="vc-noise" pathLength="1" d="M20 210 L42 150 L58 196 L78 104 L98 180 L118 88 L140 170 L160 70 L182 158 L204 96 L226 176 L250 82 L272 150 L296 110 L318 172 L340 120 L362 150 L380 136"/>
+                <path class="vc-clean" id="vc-clean" pathLength="1" d="M20 210 C120 20 280 20 380 136"/>
+                <g class="vc-steps"><circle cx="86" cy="118" r="11"/><circle cx="200" cy="68" r="11"/><circle cx="318" cy="84" r="11"/>
+                  <text x="86" y="122">1</text><text x="200" y="72">2</text><text x="318" y="88">3</text></g>
+                <circle class="vc-ball" r="8"><animateMotion dur="5s" repeatCount="indefinite" calcMode="linear" keyTimes="0;.35;.68;1" keyPoints="0;0;1;1"><mpath href="#vc-clean"/></animateMotion></circle>
+                <text class="viz-label" x="20" y="244">noise</text><text class="viz-label viz-label--on" x="380" y="170" text-anchor="end">clear</text>
+              </svg>
+            </div>
+          </li>
+          <li class="principle" data-principle="direction">
+            <button class="principle__tab" type="button" aria-expanded="false" aria-controls="pr-direction" data-cursor="view">
+              <span class="principle__n">02</span>
+              <span class="principle__vert">Personal direction</span>
+              <span class="principle__plus" aria-hidden="true"></span>
+            </button>
+            <div class="principle__body" id="pr-direction">
+              <div class="principle__text">
+                <p class="mono principle__kicker">02 · Principle</p>
+                <h3>Personal direction</h3>
+                <p>Shape coaching around the student’s sport and goals.</p>
+              </div>
+              <svg class="principle__viz viz-branch" viewBox="0 0 400 260" aria-hidden="true">
+                <g class="viz-grid"><path d="M0 65H400M0 130H400M0 195H400M100 0V260M200 0V260M300 0V260"/></g>
+                <path class="vb-b" data-branch="pickleball"  pathLength="1" d="M34 130 H150 C220 130 220 26 300 26"/>
+                <path class="vb-b" data-branch="tennis"      pathLength="1" d="M34 130 H150 C220 130 220 78 300 78"/>
+                <path class="vb-b" data-branch="badminton"   pathLength="1" d="M34 130 H150 C220 130 220 130 300 130"/>
+                <path class="vb-b" data-branch="racquetball" pathLength="1" d="M34 130 H150 C220 130 220 182 300 182"/>
+                <path class="vb-b" data-branch="more"        pathLength="1" d="M34 130 H150 C220 130 220 234 300 234"/>
+                <g class="vb-pulses">
+                  <path class="vb-p" data-branch="pickleball"  pathLength="1" d="M34 130 H150 C220 130 220 26 300 26"/>
+                  <path class="vb-p" data-branch="tennis"      pathLength="1" d="M34 130 H150 C220 130 220 78 300 78"/>
+                  <path class="vb-p" data-branch="badminton"   pathLength="1" d="M34 130 H150 C220 130 220 130 300 130"/>
+                  <path class="vb-p" data-branch="racquetball" pathLength="1" d="M34 130 H150 C220 130 220 182 300 182"/>
+                  <path class="vb-p" data-branch="more"        pathLength="1" d="M34 130 H150 C220 130 220 234 300 234"/>
+                </g>
+                <circle class="vb-you" cx="34" cy="130" r="16"/><text class="vb-you-t" x="34" y="134">YOU</text>
+                <g class="vb-ends">
+                  <circle data-branch="pickleball" cx="300" cy="26" r="7"/><circle data-branch="tennis" cx="300" cy="78" r="7"/>
+                  <circle data-branch="badminton" cx="300" cy="130" r="7"/><circle data-branch="racquetball" cx="300" cy="182" r="7"/>
+                  <circle data-branch="more" cx="300" cy="234" r="7"/>
+                  <text data-branch="pickleball" x="314" y="30">Pickleball</text><text data-branch="tennis" x="314" y="82">Tennis</text>
+                  <text data-branch="badminton" x="314" y="134">Badminton</text><text data-branch="racquetball" x="314" y="186">Racquetball</text>
+                  <text data-branch="more" x="314" y="238">More</text>
+                </g>
+              </svg>
+            </div>
+          </li>
+          <li class="principle" data-principle="multi">
+            <button class="principle__tab" type="button" aria-expanded="false" aria-controls="pr-multi" data-cursor="view">
+              <span class="principle__n">03</span>
+              <span class="principle__vert">Multi-sport experience</span>
+              <span class="principle__plus" aria-hidden="true"></span>
+            </button>
+            <div class="principle__body" id="pr-multi">
+              <div class="principle__text">
+                <p class="mono principle__kicker">03 · Principle</p>
+                <h3>Multi-sport experience</h3>
+                <p>Bring more than 10 years of teaching perspective across different racquet sports.</p>
+              </div>
+              <div class="principle__viz viz-multi" aria-hidden="true">
+                <p class="vm-years"><span data-count>10</span>+<small class="mono">years teaching</small></p>
+                <svg class="vm-orbit" viewBox="0 0 260 260">
+                  <circle class="vm-ring" cx="130" cy="130" r="112"/>
+                  <g class="vm-spin">
+                    <use class="vm-sat" data-morph="pickleball" href="#gear-pickleball" x="112" y="-2" width="36" height="44"/>
+                    <use class="vm-sat" data-morph="tennis" href="#gear-tennis" x="224" y="108" width="36" height="44"/>
+                    <use class="vm-sat" data-morph="badminton" href="#gear-badminton" x="112" y="218" width="36" height="44"/>
+                    <use class="vm-sat" data-morph="racquetball" href="#gear-racquetball" x="0" y="108" width="36" height="44"/>
+                  </g>
+                  <g class="viz-morph__g" data-morph="pickleball"><use href="#gear-pickleball" x="95" y="50" width="70" height="160"/></g>
+                  <g class="viz-morph__g" data-morph="tennis"><use href="#gear-tennis" x="95" y="50" width="70" height="160"/></g>
+                  <g class="viz-morph__g" data-morph="badminton"><use href="#gear-badminton" x="95" y="50" width="70" height="160"/></g>
+                  <g class="viz-morph__g" data-morph="racquetball"><use href="#gear-racquetball" x="95" y="50" width="70" height="160"/></g>
+                </svg>
+              </div>
+            </div>
+          </li>
+        </ol>
+
+        <!-- 06 → 07: many sports converge into one line that leads to contact -->
+        <div class="converge" aria-hidden="true">
+          <div class="converge__labels mono">
+            <span data-conv="pickleball">Pickleball</span><span data-conv="tennis">Tennis</span><span data-conv="badminton">Badminton</span><span data-conv="racquetball">Racquetball</span><span data-conv="more">More</span>
+          </div>
+          <svg viewBox="0 0 1000 300" preserveAspectRatio="none">
+            <path data-conv="pickleball" d="M100 0 C100 150 500 140 500 220"/>
+            <path data-conv="tennis" d="M300 0 C300 130 500 150 500 220"/>
+            <path data-conv="badminton" d="M500 0 C500 100 500 160 500 220"/>
+            <path data-conv="racquetball" d="M700 0 C700 130 500 150 500 220"/>
+            <path data-conv="more" d="M900 0 C900 150 500 140 500 220"/>
+            <path class="converge__one" d="M500 220 V300"/>
+          </svg>
+          <p class="converge__note mono">Different sports. One next step.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═════════ 07 — CONTACT + FOOTER ═════════ -->
+    <section class="contact" id="contact" data-theme="dark" aria-labelledby="contact-title">
+      <span class="contact__line" aria-hidden="true"></span>
+      <div class="contact__grid">
+        <div class="contact__copy">
+          <p class="eyebrow mono"><span class="eyebrow__n">07</span> Start training</p>
+          <h2 class="h-display" id="contact-title"><span>Find your sport.</span> <span class="accent-mark">Start your next session.</span></h2>
+          <p class="contact__lede">Tell Coach Kal what you want to train in and what you’d like to improve.</p>
+          <div class="contact__ctas">
+            <a class="btn btn--paper btn--lg magnetic" href="#contact-form" data-cursor="start" data-focus-form>
+              <span class="btn__text">Talk to Coach Kal</span>
+              <span class="btn__chip" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5"/></svg></span>
+            </a>
+            <a class="btn btn--ghost-dark btn--lg magnetic" href="#court" data-cursor="choose" data-choose>
+              <span class="btn__text">Find your sport</span>
+              <span class="btn__chip" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 13V4M4.5 7.5 8 4l3.5 3.5"/></svg></span>
+            </a>
+          </div>
+          <ul class="contact__details mono" aria-label="Contact details (placeholders)">
+            <li><span>Email</span> [email to be confirmed]</li>
+            <li><span>Phone</span> [phone to be confirmed]</li>
+            <li><span>Area</span> [service area to be confirmed]</li>
+          </ul>
+        </div>
+
+        <!-- Netlify Forms: submissions appear in the Netlify dashboard (Forms → contact).
+             Turn on email notifications there so Coach Kal receives each message. -->
+        <form class="form" id="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="company" novalidate>
+          <input type="hidden" name="form-name" value="contact">
+          <p class="form__hp" aria-hidden="true"><label>Leave this empty <input name="company" tabindex="-1" autocomplete="off"></label></p>
+          <p class="form__micro" data-sport-text="form">Choose your sport so Coach Kal knows where to start.</p>
+          <div class="field">
+            <label for="f-name">Name</label>
+            <input id="f-name" name="name" type="text" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label for="f-contact">Email or phone</label>
+            <input id="f-contact" name="contact" type="text" autocomplete="email" required aria-describedby="f-contact-hint">
+            <span class="field__hint" id="f-contact-hint">Whichever you prefer Coach Kal to use.</span>
+          </div>
+          <div class="field">
+            <label for="f-sport">Sport</label>
+            <div class="select">
+              <select id="f-sport" name="sport" required>
+                <option value="">Choose your sport</option>
+                <option value="pickleball">Pickleball</option>
+                <option value="tennis">Tennis</option>
+                <option value="badminton">Badminton</option>
+                <option value="racquetball">Racquetball</option>
+                <option value="more">More sports / other</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="f-goals">Goals / message <span class="field__opt">(optional)</span></label>
+            <textarea id="f-goals" name="goals" rows="3"></textarea>
+          </div>
+          <button class="btn btn--accent btn--lg btn--block magnetic" type="submit" data-cursor="start">
+            <span class="btn__text">Start the conversation</span>
+            <span class="btn__chip" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5"/></svg></span>
+          </button>
+          <p class="form__status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+
+      <footer class="footer">
+        <p class="footer__close" aria-label="Pick your game. Build your skills.">
+          <span>Pick your game.</span> <span class="accent-mark">Build your skills.</span>
+        </p>
+        <div class="footer__row">
+          <a class="footer__brand" href="#top">Coach Kal</a>
+          <nav class="footer__sports" aria-label="Sports">
+            <a href="#explorer" data-set-sport="pickleball">Pickleball</a>
+            <a href="#explorer" data-set-sport="tennis">Tennis</a>
+            <a href="#explorer" data-set-sport="badminton">Badminton</a>
+            <a href="#explorer" data-set-sport="racquetball">Racquetball</a>
+            <a href="#explorer" data-set-sport="more">More Sports</a>
+          </nav>
+          <nav class="footer__meta" aria-label="Footer">
+            <a href="#contact">Contact</a>
+            <a href="#" aria-disabled="true" title="Placeholder — add social link">[Social link]</a>
+            <a href="#" aria-disabled="true" title="Placeholder — add social link">[Social link]</a>
+            <a href="#" aria-disabled="true" title="Placeholder — add privacy policy">Privacy</a>
+          </nav>
+        </div>
+        <p class="footer__legal mono">© <span data-year>2026</span> Coach Kal · Multi-sport racquet coaching</p>
+      </footer>
+    </section>
+  </main>
+
+  <!-- Media lightbox -->
+  <dialog class="lightbox" aria-label="Media viewer">
+    <button class="lightbox__close" type="button" aria-label="Close viewer">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3 3 13"/></svg>
+    </button>
+    <div class="lightbox__body"></div>
+    <p class="lightbox__cap mono"></p>
+  </dialog>
+
+  <!-- Equipment silhouettes (shared symbols) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <symbol id="gear-pickleball" viewBox="0 0 100 240">
+        <rect class="g-head" x="14" y="8" width="72" height="146" rx="16"/>
+        <path class="g-detail" d="M24 40 H76 M24 122 H76"/>
+        <rect class="g-handle" x="40" y="154" width="20" height="78" rx="6"/>
+      </symbol>
+      <symbol id="gear-tennis" viewBox="0 0 100 240">
+        <ellipse class="g-head" cx="50" cy="66" rx="38" ry="56"/>
+        <path class="g-detail" d="M30 30 V104 M50 12 V120 M70 30 V104 M16 48 H84 M13 68 H87 M16 88 H84"/>
+        <path class="g-handle" d="M36 118 L46 160 V232 H54 V160 L64 118"/>
+      </symbol>
+      <symbol id="gear-badminton" viewBox="0 0 100 240">
+        <ellipse class="g-head" cx="50" cy="48" rx="26" ry="38"/>
+        <path class="g-detail" d="M40 18 V78 M50 11 V85 M60 18 V78 M28 36 H72 M25 50 H75 M28 64 H72"/>
+        <path class="g-handle" d="M49 86 V180 M45 180 H55 V234 H45 Z"/>
+      </symbol>
+      <symbol id="gear-racquetball" viewBox="0 0 100 240">
+        <path class="g-head" d="M50 8 C84 8 94 44 88 84 C84 116 66 138 56 150 H44 C34 138 16 116 12 84 C6 44 16 8 50 8 Z"/>
+        <path class="g-detail" d="M32 26 V120 M50 12 V140 M68 26 V120 M16 56 H84 M14 84 H86"/>
+        <path class="g-handle" d="M44 150 V214 H56 V150 M44 214 C36 226 40 236 50 236 C60 236 64 226 56 214"/>
+      </symbol>
+      <symbol id="gear-more" viewBox="0 0 100 240">
+        <rect class="g-head" x="16" y="40" width="68" height="68" rx="6" stroke-dasharray="6 6"/>
+        <path class="g-detail" d="M50 56 V92 M32 74 H68"/>
+        <path class="g-handle" d="M50 108 V200"/>
+      </symbol>
+      <symbol id="gear-none" viewBox="0 0 100 240">
+        <circle class="g-head" cx="50" cy="90" r="34" stroke-dasharray="4 7"/>
+        <path class="g-detail" d="M50 124 V200"/>
+      </symbol>
+    </defs>
+  </svg>
+</body>
+</html>
