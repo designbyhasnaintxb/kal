@@ -107,16 +107,27 @@
     groupGreen: { type: 'img', src: 'coaching-group-green', w: 1122, h: 1402, orient: 'port', sports: [], label: 'Coaching session · Group', alt: 'Coach Kal feeding balls to a young player while others wait' },
     overhead:   { type: 'img', src: 'coaching-overhead-group', w: 1122, h: 1402, orient: 'port', sports: [], label: 'Coaching session · Group', alt: 'Overhead view of Coach Kal instructing a group' },
     rbPortrait: { type: 'img', src: 'racquetball-court-portrait', w: 1254, h: 1254, orient: 'sq', sports: ['racquetball'], label: 'Racquetball · On court', alt: 'Coach Kal on a racquetball court holding a racquet' },
-    rbEvent:    { type: 'img', src: 'racquetball-event-group', w: 1674, h: 940, orient: 'land', sports: ['racquetball'], label: 'Racquetball · Event', alt: 'Group photo on a racquetball court at an event' }
+    rbEvent:    { type: 'img', src: 'racquetball-event-group', w: 1674, h: 940, orient: 'land', sports: ['racquetball'], label: 'Racquetball · Event', alt: 'Group photo on a racquetball court at an event' },
+    rbMedal:    { type: 'img', src: 'racquetball-twg-medal-court', w: 2000, h: 1126, orient: 'land', sports: ['racquetball'], label: 'Racquetball · The World Games 2025, Chengdu', alt: 'Four people on a glass racquetball court under The World Games 2025 Chengdu branding, two of them holding bronze medals' },
+    rbStaff:    { type: 'img', src: 'racquetball-twg-group-selfie', w: 1600, h: 1200, orient: 'land', sports: ['racquetball'], label: 'Racquetball · The World Games 2025 · Event team', alt: 'Group selfie with event staff in red polos at The World Games 2025 in Chengdu' },
+    rbTeam:     { type: 'img', src: 'racquetball-twg-group', w: 960, h: 1280, orient: 'port', sports: ['racquetball'], label: 'Racquetball · The World Games 2025 · Event team', alt: 'Six people standing together in a sports hall at The World Games 2025 in Chengdu' },
+    rbAward:    { type: 'img', src: 'racquetball-twg-award', w: 1200, h: 1600, orient: 'port', sports: ['racquetball'], label: 'Racquetball · Indian Racquetball Association award', alt: 'Three people in India racquetball team jackets holding an Indian Racquetball Association trophy at The World Games 2025 in Chengdu' },
+    rbMex:      { type: 'video', src: 'racquetball-twg-india-mexico', orient: 'port', sports: ['racquetball'], label: 'Racquetball · The World Games 2025 · India vs Mexico walk-out', alt: 'Players walking out and lining up on court before the India vs Mexico racquetball match at The World Games 2025' },
+    rbBreak:    { type: 'video', src: 'racquetball-twg-break-coaching', orient: 'land', sports: ['racquetball'], label: 'Racquetball · The World Games 2025 · Break-time coaching, India vs Japan', alt: 'Broadcast footage of a coach talking to a player during a break in the India vs Japan racquetball match' },
+    bdTeam:     { type: 'img', src: 'badminton-team-orange', w: 1500, h: 2000, orient: 'port', sports: ['badminton'], label: 'Badminton · Team day', alt: 'Six players in matching orange “BOSS Baddies Orange” jerseys posing with rackets on an indoor badminton court' }
   };
-  /* where each sport's media goes; tennis/badminton have no sport-specific media yet */
+  /* where each sport's media goes; tennis has no sport-specific media yet */
   const PLACE = {
-    hero:     { none: 'pointing', pickleball: 'action', tennis: 'demo', badminton: 'oneBlue', racquetball: 'rbPortrait', more: 'clay' },
-    explorer: { none: 'groupInstr', pickleball: 'cross', tennis: 'oneGreen', badminton: 'groupBlue', racquetball: 'rbEvent', more: 'groupGreen' },
-    lead:     { none: 'singles', pickleball: 'singles', tennis: 'pointing', badminton: 'demo', racquetball: 'rbEvent', more: 'overhead' }
+    hero:     { none: 'pointing', pickleball: 'action', tennis: 'demo', badminton: 'bdTeam', racquetball: 'rbPortrait', more: 'clay' },
+    explorer: { none: 'groupInstr', pickleball: 'cross', tennis: 'oneGreen', badminton: 'bdTeam', racquetball: 'rbStaff', more: 'groupGreen' },
+    lead:     { none: 'singles', pickleball: 'singles', tennis: 'pointing', badminton: 'bdTeam', racquetball: 'rbMedal', more: 'overhead' }
   };
   const POOL = ['stance', 'wall', 'action', 'event', 'gesture', 'portrait', 'cross', 'singles',
-    'groupInstr', 'oneBlue', 'oneGreen', 'demo', 'clay', 'groupBlue', 'groupGreen', 'pointing', 'overhead', 'rbPortrait', 'rbEvent'];
+    'groupInstr', 'oneBlue', 'oneGreen', 'demo', 'clay', 'groupBlue', 'groupGreen', 'pointing', 'overhead',
+    'rbMedal', 'rbMex', 'rbAward', 'rbBreak', 'rbTeam', 'rbStaff', 'rbPortrait', 'rbEvent', 'bdTeam'];
+
+  /* editable content (assets/js/content.js); the page still renders if it's missing */
+  const CONTENT = window.COACH_CONTENT || {};
 
   /* ------------------------------------------------------------------------
      COURT GEOMETRY (top-down units: floor = 1000 × 560, ~11 units per foot)
@@ -264,7 +275,7 @@
         b.setAttribute('role', 'radio');
         b.dataset.sport = s;
         b.style.setProperty('--i', i);
-        if (kind === 'media') {
+        if (kind === 'media' || kind === 'packages') {
           b.className = 'pill';
           b.textContent = SPORTS[s].short;
         } else {
@@ -311,7 +322,7 @@
       setSport(list[n].dataset.sport);
     });
     // hover intent selects on desktop (sport names change activeSport)
-    if (group.dataset.sportGroup !== 'media') {
+    if (group.dataset.sportGroup !== 'media' && group.dataset.sportGroup !== 'packages') {
       group.addEventListener('pointerover', e => {
         if (!mqFine.matches || e.pointerType !== 'mouse') return;
         const b = e.target.closest('[role="radio"]');
@@ -528,6 +539,186 @@
     const lead = e.target.closest('.media__lead');
     if (lead && lead.dataset.key && !e.target.closest('button')) Lightbox.open(lead.dataset.key);
   });
+
+  /* ------------------------------------------------------------------------
+     02 — INTRO VIDEO (click to play with sound; nothing downloads before that)
+     ------------------------------------------------------------------------ */
+  (() => {
+    const fig = $('[data-intro]');
+    if (!fig) return;
+    const video = $('.intro__video', fig), btn = $('.intro__play', fig), source = $('source', video);
+    const cfg = CONTENT.intro || {};
+    if (cfg.src && source.getAttribute('src') !== cfg.src) { source.setAttribute('src', cfg.src); video.load(); }
+    if (cfg.poster) video.poster = cfg.poster;
+    if (cfg.duration) {
+      $('[data-intro-dur]', fig).textContent = `Intro · ${cfg.duration}`;
+      btn.setAttribute('aria-label', `Play the Meet Coach Kal introduction video, ${cfg.duration}`);
+    }
+    const note = $('[data-intro-note]', fig);
+    if (note && cfg.standIn === false) note.remove();
+
+    const stop = () => {
+      fig.classList.remove('is-playing');
+      video.controls = false;
+    };
+    btn.addEventListener('click', () => {
+      fig.classList.add('is-playing');
+      video.controls = true;
+      const p = video.play();
+      if (p && p.catch) p.catch(() => stop());
+      video.focus({ preventScroll: true });
+    });
+    video.addEventListener('ended', () => { stop(); video.currentTime = 0; btn.focus({ preventScroll: true }); });
+    source.addEventListener('error', stop);
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(([en]) => { if (!en.isIntersecting && !video.paused) video.pause(); }, { threshold: .2 }).observe(fig);
+    }
+  })();
+
+  /* ------------------------------------------------------------------------
+     06 — INSTAGRAM (curated tiles; links go live once the handle/post URLs exist)
+     ------------------------------------------------------------------------ */
+  (() => {
+    const grid = $('[data-ig-grid]');
+    if (!grid) return;
+    const ig = CONTENT.instagram || {};
+    const handle = String(ig.handle || '').replace(/^@/, '').trim();
+    const profile = handle ? `https://www.instagram.com/${encodeURIComponent(handle)}/` : '';
+    if (profile) {
+      [$('[data-ig-follow]'), $('[data-ig-link]')].filter(Boolean).forEach(a => {
+        a.href = profile; a.target = '_blank'; a.rel = 'noopener';
+        a.removeAttribute('aria-disabled'); a.removeAttribute('title');
+      });
+      const label = $('[data-ig-handle]');
+      if (label) label.textContent = `Follow @${handle}`;
+    }
+    const REEL = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3.5v9l7-4.5z"/></svg>';
+    const posts = (ig.posts || []).filter(p => MEDIA[p.media]).slice(0, 6);
+    posts.forEach(p => {
+      const m = MEDIA[p.media];
+      const href = p.url || profile;
+      const li = document.createElement('li');
+      li.className = 'ig';
+      const thumb = m.type === 'video' ? videoHTML(m, { posterOnly: true }) : pictureHTML(m, '(max-width: 900px) 46vw, 16vw');
+      const badge = p.kind === 'reel' ? `<span class="ig__kind mono">${REEL}Reel</span>` : '';
+      const inner = `<span class="ig__media">${thumb}</span>${badge}<span class="ig__cap mono">${esc(m.label)}</span>`;
+      li.innerHTML = href
+        ? `<a class="ig__tile" href="${esc(href)}" target="_blank" rel="noopener" aria-label="${esc(m.label)} — open on Instagram" data-cursor="view">${inner}</a>`
+        : `<button class="ig__tile" type="button" data-open="${p.media}" aria-label="${m.type === 'video' ? 'Watch' : 'View'}: ${esc(m.label)}" data-cursor="${m.type === 'video' ? 'watch' : 'view'}">${inner}</button>`;
+      grid.appendChild(li);
+    });
+    const note = $('[data-ig-note]');
+    if (note && profile && posts.every(p => p.url)) note.remove();
+  })();
+
+  /* ------------------------------------------------------------------------
+     08 — PACKAGES, PRIVATE LESSONS & CLINICS (rendered from content.js)
+     ------------------------------------------------------------------------ */
+  const Packages = (() => {
+    const grid = $('[data-pkg-grid]');
+    if (!grid) return { render() {}, options: () => ({ packages: [], clinics: [] }), today: '' };
+    const packs = (CONTENT.packages || []).filter(p => p.enabled !== false);
+    const formats = CONTENT.formats || [];
+    const fmtById = Object.fromEntries(formats.map(f => [f.id, f]));
+    const money = p => {
+      if (p == null || p === '') return null;
+      try { return new Intl.NumberFormat('en-US', { style: 'currency', currency: CONTENT.currency || 'USD', maximumFractionDigits: 0 }).format(p); }
+      catch (e) { return String(p); }
+    };
+    const isSport = s => s !== 'none' && s !== 'more';
+    const offered = (item, s) => !isSport(s) || !(item.sports || []).length || item.sports.includes(s);
+    const sportsLabel = (list, s) => {
+      if (isSport(s)) return SPORTS[s].label;
+      return (list || []).length ? list.map(k => (SPORTS[k] || {}).label || k).join(' · ') : 'Any sport';
+    };
+    const localISO = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+    const today = localISO(new Date());
+    const sessionId = x => x.id || `${x.format}-${x.date}-${x.start}`;
+    const upcoming = s => (CONTENT.sessions || [])
+      .filter(x => x.date >= today && (!isSport(s) || !x.sport || x.sport === s))
+      .sort((a, b) => (a.date + a.start).localeCompare(b.date + b.start));
+    const fmtDate = d => {
+      const dt = new Date(d + 'T00:00:00');
+      return isNaN(dt) ? d : dt.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+    };
+
+    function render(s) {
+      const shown = packs.filter(p => offered(p, s));
+      grid.innerHTML = shown.map((p, i) => {
+        const price = money(p.price);
+        return `<li class="pkg" style="--i:${i}">
+          <p class="mono pkg__sport">${esc(sportsLabel(p.sports, s))}</p>
+          <p class="pkg__count"><span>${Number(p.sessions) || 1}</span><small class="mono">${Number(p.sessions) === 1 ? 'session' : 'sessions'}</small></p>
+          <h3 class="pkg__name">${esc(p.name)}</h3>
+          ${p.summary ? `<p class="pkg__summary">${esc(p.summary)}</p>` : ''}
+          <p class="pkg__price"><span class="mono">Price</span>${price ? `<strong>${esc(price)}</strong>` : '<strong class="ph">To be confirmed</strong>'}</p>
+          <button class="btn btn--ink btn--block" type="button" data-inquire="package" data-pick="${esc(p.id)}" data-cursor="start">
+            <span class="btn__text">Ask about this package</span>
+            <span class="btn__chip" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5"/></svg></span>
+          </button>
+        </li>`;
+      }).join('') || `<li class="pkg pkg--empty"><p>No ${esc(SPORTS[s].label.toLowerCase())} packages listed yet. Ask Coach Kal about options below.</p></li>`;
+
+      const status = $('[data-pkg-status]');
+      if (status) {
+        const pending = shown.some(p => money(p.price) == null) ? ' Prices to be confirmed.' : '';
+        status.textContent = (isSport(s) ? `Showing packages for ${SPORTS[s].label.toLowerCase()}.` : 'Every package works for any sport Coach Kal teaches.') + pending;
+      }
+
+      const sessions = upcoming(s);
+      const list = $('[data-formats]');
+      if (list) list.innerHTML = formats.filter(f => offered(f, s)).map(f => {
+        const next = sessions.find(x => x.format === f.id);
+        const when = f.booking === 'request' ? 'By request · you pick the time'
+          : next ? `Next: ${fmtDate(next.date)} · ${esc(next.start)}` : '<span class="ph">Dates to be announced</span>';
+        const cta = f.booking === 'request' ? 'Request a time' : next ? 'Book a spot' : 'Ask about the next clinic';
+        return `<li class="fmt">
+          <p class="mono fmt__level">${esc(f.level || '')}</p>
+          <h4 class="fmt__name">${esc(f.name)}</h4>
+          <p class="fmt__summary">${esc(f.summary || '')}</p>
+          <p class="mono fmt__when">${when}</p>
+          <button class="btn btn--sm btn--ghost" type="button" data-inquire="${f.booking === 'request' ? 'private' : 'clinic'}" data-pick="${f.booking === 'request' ? '' : esc(next ? sessionId(next) : f.id)}" data-cursor="start">
+            <span class="btn__text">${cta}</span>
+            <span class="btn__chip" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5"/></svg></span>
+          </button>
+        </li>`;
+      }).join('');
+
+      const sched = $('[data-schedule]');
+      if (sched) {
+        if (!sessions.length) {
+          sched.innerHTML = '<p class="schedule__empty mono">Placeholder · clinic dates, times and open spots will be listed here once confirmed.</p>';
+        } else {
+          sched.innerHTML = `<table class="schedule__table"><caption class="sr-only">Upcoming clinic dates</caption>
+            <thead><tr><th scope="col">Date</th><th scope="col">Time</th><th scope="col">Clinic</th><th scope="col">Sport</th><th scope="col">Spots</th><th scope="col"><span class="sr-only">Book</span></th></tr></thead>
+            <tbody>${sessions.map(x => {
+              const f = fmtById[x.format] || { name: x.format };
+              const left = x.capacity != null ? Math.max(0, x.capacity - (x.booked || 0)) : null;
+              const full = left === 0;
+              return `<tr>
+                <td data-th="Date">${esc(fmtDate(x.date))}</td>
+                <td data-th="Time">${esc(x.start)}${x.end ? '–' + esc(x.end) : ''}</td>
+                <td data-th="Clinic">${esc(f.name)}</td>
+                <td data-th="Sport">${esc((SPORTS[x.sport] || {}).label || 'Any')}</td>
+                <td data-th="Spots">${left == null ? '—' : full ? 'Full' : `${left} of ${x.capacity} left`}</td>
+                <td>${full ? '' : `<button class="btn btn--sm btn--ink" type="button" data-inquire="clinic" data-pick="${esc(sessionId(x))}"><span class="btn__text">Book</span></button>`}</td>
+              </tr>`;
+            }).join('')}</tbody></table>`;
+        }
+      }
+    }
+
+    /* options for the contact form's package / clinic selects */
+    const options = () => ({
+      packages: packs.map(p => [p.id, p.name]),
+      clinics: [
+        ...formats.filter(f => f.booking === 'schedule').map(f => [f.id, f.name]),
+        ...upcoming('none').map(x => [sessionId(x), `${(fmtById[x.format] || { name: x.format }).name} · ${fmtDate(x.date)} ${x.start}`])
+      ]
+    });
+    return { render, options, today };
+  })();
+  onSport(s => Packages.render(s));
 
   /* ------------------------------------------------------------------------
      THE MODULAR COURT (hero) — one court, five states
@@ -1145,10 +1336,43 @@
      ------------------------------------------------------------------------ */
   const Form = (() => {
     const form = $('#contact-form');
-    if (!form) return { sync() {} };
+    if (!form) return { sync() {}, prefill() {} };
     const sel = $('#f-sport', form);
     const status = $('.form__status', form);
     sel.addEventListener('change', () => setSport(sel.value || 'none'));
+
+    /* inquiry type: show only the fields that matter; hidden fields are disabled so they don't submit */
+    const type = $('#f-type', form), pkgSel = $('#f-package', form), clinicSel = $('#f-clinic', form);
+    const TYPE_LABEL = { general: 'message', private: 'private lesson request', package: 'package inquiry', clinic: 'clinic inquiry' };
+    const fillSelect = (el, pairs) => {
+      if (!el || !pairs.length) return;
+      const keep = el.value;
+      el.innerHTML = '<option value="">Not sure yet</option>' + pairs.map(([v, t]) => `<option value="${esc(v)}">${esc(t)}</option>`).join('');
+      el.value = keep;
+    };
+    const opts = Packages.options();
+    fillSelect(pkgSel, opts.packages);
+    fillSelect(clinicSel, opts.clinics);
+    const date = $('#f-date', form);
+    if (date && Packages.today) date.min = Packages.today;
+    const toggle = () => {
+      $$('[data-show-for]', form).forEach(f => {
+        const on = f.dataset.showFor.split(' ').includes(type.value);
+        f.hidden = !on;
+        $$('input, select, textarea', f).forEach(c => { c.disabled = !on; });
+      });
+    };
+    if (type) { type.addEventListener('change', toggle); toggle(); }
+    function prefill(kind, pick) {
+      if (!type) return;
+      type.value = TYPE_LABEL[kind] ? kind : 'general';
+      toggle();
+      const target = kind === 'package' ? pkgSel : kind === 'clinic' ? clinicSel : null;
+      if (target && pick) {
+        target.value = pick;
+        if (target.value !== pick) target.value = '';
+      }
+    }
     const setErr = (input, msg) => {
       input.setAttribute('aria-invalid', msg ? 'true' : 'false');
       const field = input.closest('.field');
@@ -1174,10 +1398,11 @@
       const bad = $('[aria-invalid="true"]', form);
       if (bad) { bad.focus(); status.textContent = ''; return; }
       const sport = SPORTS[sel.value].label.toLowerCase();
+      const what = `${sport} ${TYPE_LABEL[type ? type.value : 'general'] || 'message'}`;
       const who = esc(name.value.trim());
       // local preview: Netlify Forms only exists on the deployed site
       if (/^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname) || location.protocol === 'file:') {
-        status.innerHTML = `<strong>Thanks, ${who}.</strong> Your ${esc(sport)} message is ready. <em>Local preview — messages are delivered once the site is live on Netlify.</em>`;
+        status.innerHTML = `<strong>Thanks, ${who}.</strong> Your ${esc(what)} is ready. <em>Local preview — messages are delivered once the site is live on Netlify.</em>`;
         return;
       }
       const btn = $('button[type="submit"]', form);
@@ -1189,14 +1414,15 @@
         body: new URLSearchParams(new FormData(form)).toString()
       }).then(r => {
         if (!r.ok) throw new Error(r.status);
-        status.innerHTML = `<strong>Thanks, ${who}.</strong> Your ${esc(sport)} message has been sent to Coach Kal.`;
+        status.innerHTML = `<strong>Thanks, ${who}.</strong> Your ${esc(what)} has been sent to Coach Kal.`;
         form.reset();
+        toggle();
         sel.value = state.sport === 'none' ? '' : state.sport;
       }).catch(() => {
         status.innerHTML = '<strong>Sorry — that didn’t send.</strong> Please try again in a moment.';
       }).finally(() => { btn.disabled = false; });
     });
-    return { sync(s) { sel.value = s === 'none' ? '' : s; } };
+    return { sync(s) { sel.value = s === 'none' ? '' : s; }, prefill };
   })();
   onSport(s => Form.sync(s));
 
@@ -1337,8 +1563,18 @@
   })();
 
   document.addEventListener('click', e => {
+    // placeholder links (e.g. social handle not confirmed yet) do nothing
+    if (e.target.closest('a[aria-disabled="true"]')) { e.preventDefault(); return; }
+
     const setter = e.target.closest('[data-set-sport]');
     if (setter) setSport(setter.dataset.setSport);
+
+    const inquire = e.target.closest('[data-inquire]');
+    if (inquire) {
+      Form.prefill(inquire.dataset.inquire, inquire.dataset.pick);
+      scrollToEl($('#contact-form'), () => $('#f-name').focus({ preventScroll: true }));
+      return;
+    }
 
     const chooser = e.target.closest('[data-choose]');
     if (chooser) {

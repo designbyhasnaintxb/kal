@@ -1423,6 +1423,164 @@ html[data-sport="none"] .field input:focus, html[data-sport="none"] .field texta
 .lightbox__close svg { width: 16px; height: 16px; stroke: var(--paper); stroke-width: 2; fill: none; }
 
 /* ==========================================================================
+   02 — INTRO VIDEO (inside the coach portrait; the portrait is the poster)
+   ========================================================================== */
+.intro__frame { position: relative; aspect-ratio: 4 / 5; overflow: hidden; background: var(--ink); }
+.intro__poster, .intro__video { position: absolute; inset: 0; width: 100%; height: 100%; }
+.intro__poster img { height: 100%; }
+.intro__video { object-fit: contain; background: var(--ink); opacity: 0; visibility: hidden; transition: opacity .35s; }
+.intro.is-playing .intro__video { opacity: 1; visibility: visible; }
+.intro__play {
+  position: absolute; inset: 0; z-index: 2; isolation: isolate;
+  display: flex; align-items: flex-end; gap: 14px; padding: clamp(14px, 1.6vw, 22px);
+  color: var(--paper); text-align: left;
+  transition: opacity .3s, visibility .3s;
+}
+.intro__play::before { content: ""; position: absolute; inset: 42% 0 0; z-index: -1; background: linear-gradient(transparent, rgba(20,23,24,.82)); }
+.intro.is-playing .intro__play { opacity: 0; visibility: hidden; }
+.intro__icon {
+  display: grid; place-items: center; flex: none; width: 56px; height: 56px;
+  background: var(--accent); color: var(--accent-ink);
+  transition: transform .4s var(--ease), background-color var(--t-sport), color var(--t-sport);
+}
+html[data-sport="none"] .intro__icon { background: var(--paper); color: var(--ink); }
+.intro__icon svg { width: 18px; height: 18px; fill: currentColor; }
+.intro__title {
+  display: block; font-family: var(--f-display); font-weight: 850; font-stretch: 70%; font-variation-settings: "wdth" 70;
+  text-transform: uppercase; font-size: clamp(22px, 2vw, 30px); line-height: 1;
+}
+.intro__dur { display: block; margin-top: 6px; font-size: 10.5px; color: rgba(244,241,234,.8); }
+.intro__play:focus-visible { outline-color: var(--paper); outline-offset: -6px; }
+@media (hover: hover) { .intro__play:hover .intro__icon { transform: scale(1.08); } }
+.intro__note { display: block; margin-top: 4px; font-style: normal; color: var(--muted); font-size: 10px; }
+
+/* ==========================================================================
+   06 — FOLLOW THE JOURNEY (INSTAGRAM)
+   ========================================================================== */
+.social { padding: clamp(64px, 10vh, 110px) var(--gutter) clamp(80px, 12vh, 140px); border-top: 1px solid var(--hair); }
+.social__head {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 420px); gap: 32px; align-items: end;
+  margin-bottom: clamp(28px, 4vh, 44px);
+}
+.social__lede { font-size: 17px; color: #2c3234; margin-bottom: 18px; max-width: 36ch; }
+.social__aside .btn { max-width: 100%; }
+.social__aside .btn__text { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.social__grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: clamp(8px, 1vw, 14px); }
+.ig__tile {
+  position: relative; display: block; width: 100%; aspect-ratio: 1; overflow: hidden;
+  background: var(--graphite); color: var(--paper); text-decoration: none; text-align: left;
+}
+.ig__media, .ig__media > picture, .ig__media > img { position: absolute; inset: 0; }
+.ig__media img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s var(--ease); }
+.ig__kind {
+  position: absolute; right: 8px; top: 8px; z-index: 2;
+  display: inline-flex; align-items: center; gap: 5px;
+  background: rgba(20,23,24,.8); padding: 5px 7px; font-size: 9.5px;
+}
+.ig__kind svg { width: 9px; height: 9px; fill: currentColor; }
+.ig__cap {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
+  padding: 28px 10px 12px; background: linear-gradient(transparent, rgba(20,23,24,.88)); font-size: 9.5px;
+  opacity: 0; transform: translateY(6px); transition: opacity .35s, transform .45s var(--ease);
+}
+.ig__tile::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; z-index: 3; height: 4px; background: var(--accent-line);
+  transform: scaleX(0); transform-origin: left; transition: transform .5s var(--ease);
+}
+html[data-sport="none"] .ig__tile::after { background: var(--paper); }
+@media (hover: hover) {
+  .ig__tile:hover img { transform: scale(1.05); }
+  .ig__tile:hover::after, .ig__tile:focus-visible::after { transform: scaleX(1); }
+  .ig__tile:hover .ig__cap, .ig__tile:focus-visible .ig__cap { opacity: 1; transform: none; }
+}
+@media (hover: none) { .ig__cap { display: none; } }
+.ig__tile:focus-visible { outline-offset: 4px; }
+.social__note { margin-top: 14px; color: var(--muted); font-size: 10.5px; }
+
+/* ==========================================================================
+   08 — LESSONS & PACKAGES · PRIVATE LESSONS & CLINICS
+   ========================================================================== */
+.packages { position: relative; padding: 0 var(--gutter) clamp(80px, 12vh, 140px); }
+.packages__line { display: block; width: 4px; height: clamp(60px, 10vh, 110px); margin: 0 auto; background: var(--ink); transition: background-color var(--t-sport); }
+html:not([data-sport="none"]) .packages__line { background: var(--accent-mark); }
+html[data-sport="pickleball"] .packages__line, html[data-sport="badminton"] .packages__line { background: var(--ink); }
+.packages__head {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 520px); gap: 32px; align-items: end;
+  padding-top: clamp(40px, 7vh, 80px); margin-bottom: clamp(28px, 4vh, 44px);
+}
+.packages__aside { display: flex; flex-direction: column; align-items: flex-end; gap: 12px; }
+.packages__status { font-size: 14.5px; color: var(--muted); text-align: right; }
+.packages__noscript { font-size: 16px; }
+
+.pkg-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: clamp(10px, 1.2vw, 18px); }
+.pkg {
+  display: flex; flex-direction: column; gap: 10px;
+  padding: clamp(20px, 2vw, 28px);
+  background: rgba(255,255,255,.45); box-shadow: inset 0 0 0 1px var(--hair);
+  border-top: 4px solid var(--ink); transition: border-color var(--t-sport);
+}
+html:not([data-sport="none"]) .pkg { border-top-color: var(--accent-mark); }
+.pkg__sport { color: var(--muted); font-size: 11px; }
+.pkg__count { display: flex; align-items: baseline; gap: 10px; margin-top: 4px; }
+.pkg__count span {
+  font-family: var(--f-display); font-weight: 900; font-stretch: 66%; font-variation-settings: "wdth" 66;
+  font-size: clamp(72px, 7vw, 120px); line-height: .8;
+}
+.pkg__count small { color: var(--muted); font-size: 11px; }
+.pkg__name, .fmt__name, .formats__title {
+  font-family: var(--f-display); font-weight: 850; font-stretch: 72%; font-variation-settings: "wdth" 72;
+  text-transform: uppercase; line-height: .95;
+}
+.pkg__name { font-size: clamp(24px, 2.2vw, 34px); }
+.pkg__summary { font-size: 15.5px; color: #2c3234; }
+.pkg__price {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 12px;
+  margin-top: auto; padding-top: 14px; border-top: 1px solid var(--hair);
+}
+.pkg__price .mono { color: var(--muted); font-size: 11px; }
+.pkg__price strong { font-size: 20px; font-weight: 750; }
+.pkg__price .ph { font-size: 15px; font-weight: 600; color: var(--muted); }
+.pkg .btn { margin-top: 6px; }
+.pkg--empty { grid-column: 1 / -1; }
+
+.formats { margin-top: clamp(48px, 8vh, 88px); }
+.formats__head {
+  display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 12px 32px;
+  padding-bottom: 16px; border-bottom: 1px solid var(--hair);
+}
+.formats__title { font-size: clamp(30px, 3.2vw, 52px); line-height: .9; }
+.formats__hint { color: var(--muted); max-width: 52ch; font-size: 11px; }
+.formats__list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.fmt {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 8px;
+  padding: 22px 24px 24px 0; border-bottom: 1px solid var(--hair);
+}
+.fmt + .fmt { padding-left: 24px; border-left: 1px solid var(--hair); }
+.fmt__level { color: var(--muted); font-size: 11px; }
+.fmt__name { margin: 0; font-size: clamp(24px, 2.2vw, 34px); }
+.fmt__summary { font-size: 15.5px; color: #2c3234; max-width: 34ch; }
+.fmt__when { margin-top: auto; padding-top: 8px; font-size: 11px; }
+.fmt__when .ph { color: var(--muted); }
+.fmt .btn { margin-top: 6px; }
+
+.schedule { margin-top: 18px; }
+.schedule__empty { padding: 18px 20px; border: 1.5px dashed rgba(20,23,24,.3); color: var(--muted); font-size: 11px; }
+.schedule__table { width: 100%; border-collapse: collapse; font-size: 15px; }
+.schedule__table th {
+  padding: 10px 12px 10px 0; border-bottom: 1px solid var(--hair); text-align: left;
+  font: 500 11px/1.3 var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted);
+}
+.schedule__table td { padding: 12px 12px 12px 0; border-bottom: 1px solid var(--hair); vertical-align: middle; }
+.schedule__table td:last-child { text-align: right; padding-right: 0; }
+
+/* contact form: inquiry-type dependent fields */
+.field[hidden] { display: none; }
+.field--split { margin: 0; padding: 0; border: 0; min-width: 0; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 6px 10px; }
+.field--split legend { padding: 0; margin-bottom: 6px; font: 500 11px/1.3 var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted-d); }
+.field--split .field__hint { grid-column: 1 / -1; }
+.field input[type="date"] { color-scheme: dark; }
+
+/* ==========================================================================
    RESPONSIVE — dedicated mobile layout (not a shrunken desktop)
    ========================================================================== */
 @media (max-width: 1100px) {
@@ -1556,6 +1714,25 @@ html[data-sport="none"] .field input:focus, html[data-sport="none"] .field texta
   .contact__grid { grid-template-columns: 1fr; }
   .footer__row { grid-template-columns: 1fr; }
   .footer__sports { justify-content: flex-start; }
+
+  .intro__play { align-items: flex-start; }
+  .intro__play::before { inset: 0 0 50%; background: linear-gradient(rgba(20,23,24,.78), transparent); }
+  .coach__portrait figcaption { padding-right: 46%; }
+
+  .social__head { grid-template-columns: 1fr; gap: 18px; }
+  .social__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+  .packages__head { grid-template-columns: 1fr; gap: 18px; }
+  .packages__aside { align-items: flex-start; }
+  .packages__status { text-align: left; }
+  .packages .chips { justify-content: flex-start; }
+  .formats__list { grid-template-columns: 1fr; }
+  .fmt, .fmt + .fmt { padding: 20px 0; border-left: 0; }
+  .schedule__table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .schedule__table tr { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; padding: 14px 0; border-bottom: 1px solid var(--hair); }
+  .schedule__table td { padding: 0; border: 0; }
+  .schedule__table td[data-th]::before { content: attr(data-th) " · "; font: 500 10.5px var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  .schedule__table td:last-child { grid-column: 2; grid-row: 1 / span 5; align-self: center; }
 }
 
 @media (max-width: 520px) {
@@ -1567,6 +1744,9 @@ html[data-sport="none"] .field input:focus, html[data-sport="none"] .field texta
   .facts-rail li { grid-template-columns: 92px 1fr; }
   .facts-rail__k { font-size: 24px; }
   .contact__ctas .btn { flex: 1 1 100%; justify-content: space-between; }
+  .social__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .social__aside .btn { width: 100%; justify-content: space-between; }
+  .field--split { grid-template-columns: 1fr; }
 }
 
 /* ==========================================================================

@@ -34,6 +34,7 @@
   <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script defer src="assets/js/content.js"></script>
   <script defer src="assets/js/main.js"></script>
 </head>
 <body>
@@ -63,6 +64,7 @@
       <a href="#explorer">Sports</a>
       <a href="#journey">Coaching</a>
       <a href="#media">Media</a>
+      <a href="#packages">Packages</a>
       <a href="#contact">Contact</a>
     </nav>
 
@@ -87,6 +89,7 @@
       <a href="#explorer">Sports</a>
       <a href="#journey">Coaching</a>
       <a href="#media">Media</a>
+      <a href="#packages">Packages</a>
       <a href="#contact">Contact</a>
     </nav>
     <p class="mono mobile-menu__label">Choose your court</p>
@@ -192,12 +195,22 @@
       </div>
 
       <div class="coach__visual">
-        <figure class="coach__portrait">
-          <picture>
-            <source type="image/avif" srcset="assets/media/img/coach-kal-portrait-800.avif 800w, assets/media/img/coach-kal-portrait-1600.avif 1122w" sizes="(max-width: 767px) 88vw, 36vw">
-            <img src="assets/media/img/coach-kal-portrait-800.webp" srcset="assets/media/img/coach-kal-portrait-800.webp 800w, assets/media/img/coach-kal-portrait-1600.webp 1122w" sizes="(max-width: 767px) 88vw, 36vw" width="800" height="1000" loading="lazy" decoding="async" alt="Coach Kal explaining a technique on court, holding a pickleball paddle">
-          </picture>
-          <figcaption class="mono">Coach Kal <span>— Claude Keller</span></figcaption>
+        <!-- Intro video: the portrait stays as the poster; video bytes load only on play -->
+        <figure class="coach__portrait intro" data-intro>
+          <div class="intro__frame">
+            <picture class="intro__poster">
+              <source type="image/avif" srcset="assets/media/img/coach-kal-portrait-800.avif 800w, assets/media/img/coach-kal-portrait-1600.avif 1122w" sizes="(max-width: 767px) 88vw, 36vw">
+              <img src="assets/media/img/coach-kal-portrait-800.webp" srcset="assets/media/img/coach-kal-portrait-800.webp 800w, assets/media/img/coach-kal-portrait-1600.webp 1122w" sizes="(max-width: 767px) 88vw, 36vw" width="800" height="1000" loading="lazy" decoding="async" alt="Coach Kal explaining a technique on court, holding a pickleball paddle">
+            </picture>
+            <video class="intro__video" playsinline preload="none" poster="assets/media/video/coach-kal-intro-poster.webp" aria-label="Introduction video: Meet Coach Kal">
+              <source src="assets/media/video/coach-kal-intro.mp4" type="video/mp4">
+            </video>
+            <button class="intro__play" type="button" data-cursor="watch" aria-label="Play the Meet Coach Kal introduction video, 0:22">
+              <span class="intro__icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.5v9l7-4.5z"/></svg></span>
+              <span class="intro__meta"><span class="intro__title">Meet Coach Kal</span><span class="mono intro__dur" data-intro-dur>Intro · 0:22</span></span>
+            </button>
+          </div>
+          <figcaption class="mono">Coach Kal <span>— Claude Keller</span> <em class="intro__note" data-intro-note>Placeholder · stand-in intro clip</em></figcaption>
         </figure>
         <figure class="coach__second">
           <picture>
@@ -453,7 +466,28 @@
       </aside>
     </section>
 
-    <!-- ═════════ 06 — COACHING THAT ADAPTS ═════════ -->
+    <!-- ═════════ 06 — FOLLOW THE JOURNEY (INSTAGRAM) ═════════ -->
+    <section class="social" id="instagram" aria-labelledby="social-title">
+      <div class="social__head">
+        <div>
+          <p class="eyebrow mono"><span class="eyebrow__n">06</span> Instagram</p>
+          <h2 class="h-display" id="social-title"><span>Follow the</span> <span class="accent-mark">journey.</span></h2>
+        </div>
+        <div class="social__aside">
+          <p class="social__lede">Sessions, drills and event days from the court, posted as they happen.</p>
+          <a class="btn btn--ink magnetic" href="#" data-ig-follow data-cursor="start" aria-disabled="true">
+            <span class="btn__text" data-ig-handle>Handle to be confirmed</span>
+            <span class="btn__chip" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 11 11 5M6 5h5v5"/></svg></span>
+          </a>
+        </div>
+      </div>
+      <ul class="social__grid" data-ig-grid>
+        <!-- tiles rendered from COACH_CONTENT.instagram.posts -->
+      </ul>
+      <p class="social__note mono" data-ig-note>Placeholder · tiles show site media until real posts are linked</p>
+    </section>
+
+    <!-- ═════════ 07 — COACHING THAT ADAPTS ═════════ -->
     <section class="adapt" id="approach" aria-labelledby="adapt-title">
       <div class="adapt__media" aria-hidden="true">
         <picture>
@@ -466,7 +500,7 @@
       <div class="adapt__content">
         <div class="adapt__head">
           <div>
-            <p class="eyebrow mono"><span class="eyebrow__n">06</span> Coaching that adapts</p>
+            <p class="eyebrow mono"><span class="eyebrow__n">07</span> Coaching that adapts</p>
             <h2 class="ah" id="adapt-title">
               <span class="ah__row"><span class="ah__outline">Different</span>
                 <span class="ah__icons" aria-hidden="true">
@@ -579,7 +613,7 @@
           </li>
         </ol>
 
-        <!-- 06 → 07: many sports converge into one line that leads to contact -->
+        <!-- 07 → 08: many sports converge into one line that leads to packages, then contact -->
         <div class="converge" aria-hidden="true">
           <div class="converge__labels mono">
             <span data-conv="pickleball">Pickleball</span><span data-conv="tennis">Tennis</span><span data-conv="badminton">Badminton</span><span data-conv="racquetball">Racquetball</span><span data-conv="more">More</span>
@@ -597,12 +631,40 @@
       </div>
     </section>
 
-    <!-- ═════════ 07 — CONTACT + FOOTER ═════════ -->
+    <!-- ═════════ 08 — LESSONS & PACKAGES ═════════ -->
+    <section class="packages" id="packages" aria-labelledby="packages-title">
+      <span class="packages__line" aria-hidden="true"></span>
+      <div class="packages__head">
+        <div>
+          <p class="eyebrow mono"><span class="eyebrow__n">08</span> Lessons &amp; packages</p>
+          <h2 class="h-display" id="packages-title"><span>Pick a format.</span> <span class="accent-mark">Book your sessions.</span></h2>
+        </div>
+        <div class="packages__aside">
+          <p class="packages__status" data-pkg-status>Every package works for any sport Coach Kal teaches.</p>
+          <div class="chips" role="radiogroup" aria-label="Show packages for a sport" data-sport-group="packages"></div>
+        </div>
+      </div>
+
+      <!-- cards rendered from COACH_CONTENT.packages -->
+      <ul class="pkg-grid" data-pkg-grid></ul>
+      <noscript><p class="packages__noscript">Single lessons, 5-session and 10-session packages are available. Use the form below to ask about them.</p></noscript>
+
+      <div class="formats">
+        <div class="formats__head">
+          <h3 class="formats__title">Private lessons &amp; clinics</h3>
+          <p class="mono formats__hint">Private lessons are booked around your availability. Clinics run on set dates.</p>
+        </div>
+        <ul class="formats__list" data-formats></ul>
+        <div class="schedule" data-schedule aria-live="polite"></div>
+      </div>
+    </section>
+
+    <!-- ═════════ 09 — CONTACT + FOOTER ═════════ -->
     <section class="contact" id="contact" data-theme="dark" aria-labelledby="contact-title">
       <span class="contact__line" aria-hidden="true"></span>
       <div class="contact__grid">
         <div class="contact__copy">
-          <p class="eyebrow mono"><span class="eyebrow__n">07</span> Start training</p>
+          <p class="eyebrow mono"><span class="eyebrow__n">09</span> Start training</p>
           <h2 class="h-display" id="contact-title"><span>Find your sport.</span> <span class="accent-mark">Start your next session.</span></h2>
           <p class="contact__lede">Tell Coach Kal what you want to train in and what you’d like to improve.</p>
           <div class="contact__ctas">
@@ -651,6 +713,56 @@
             </div>
           </div>
           <div class="field">
+            <label for="f-type">What are you looking for?</label>
+            <div class="select">
+              <select id="f-type" name="inquiry">
+                <option value="general">A general question</option>
+                <option value="private">A private lesson</option>
+                <option value="package">A lesson package</option>
+                <option value="clinic">A clinic</option>
+              </select>
+            </div>
+          </div>
+          <!-- Options below are the static defaults Netlify sees at deploy; main.js refreshes them from content.js -->
+          <div class="field" data-show-for="package" hidden>
+            <label for="f-package">Package</label>
+            <div class="select">
+              <select id="f-package" name="package">
+                <option value="">Not sure yet</option>
+                <option value="single">Single private lesson</option>
+                <option value="pack-5">5-session package</option>
+                <option value="pack-10">10-session package</option>
+              </select>
+            </div>
+          </div>
+          <div class="field" data-show-for="clinic" hidden>
+            <label for="f-clinic">Clinic</label>
+            <div class="select">
+              <select id="f-clinic" name="clinic">
+                <option value="">Not sure yet</option>
+                <option value="clinic-beginner">Beginner clinic</option>
+                <option value="clinic-advanced">Advanced clinic</option>
+              </select>
+            </div>
+          </div>
+          <fieldset class="field field--split" data-show-for="private package clinic" hidden>
+            <legend>Preferred day &amp; time <span class="field__opt">(optional)</span></legend>
+            <div>
+              <label class="sr-only" for="f-date">Preferred date</label>
+              <input id="f-date" name="preferred_date" type="date">
+            </div>
+            <div class="select">
+              <label class="sr-only" for="f-time">Preferred time of day</label>
+              <select id="f-time" name="preferred_time">
+                <option value="">Any time</option>
+                <option value="morning">Morning</option>
+                <option value="afternoon">Afternoon</option>
+                <option value="evening">Evening</option>
+              </select>
+            </div>
+            <span class="field__hint">Other times that work? Add them to your message.</span>
+          </fieldset>
+          <div class="field">
             <label for="f-goals">Goals / message <span class="field__opt">(optional)</span></label>
             <textarea id="f-goals" name="goals" rows="3"></textarea>
           </div>
@@ -677,7 +789,7 @@
           </nav>
           <nav class="footer__meta" aria-label="Footer">
             <a href="#contact">Contact</a>
-            <a href="#" aria-disabled="true" title="Placeholder — add social link">[Social link]</a>
+            <a href="#" data-ig-link aria-disabled="true" title="Placeholder — Instagram handle to be confirmed">Instagram</a>
             <a href="#" aria-disabled="true" title="Placeholder — add social link">[Social link]</a>
             <a href="#" aria-disabled="true" title="Placeholder — add privacy policy">Privacy</a>
           </nav>
